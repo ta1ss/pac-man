@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/style.css" />
+        <script src="/src/game.js" type="module"></script>
+        <script src="https://kit.fontawesome.com/cde4fd9a78.js" crossorigin="anonymous"></script>
+        <title>Pac-Man</title>
+    </head>
+
+        <body>
+            <div id="welcome-screen">
+                <h1>Pac-Man</h1>
+                <br>
+                <p>Welcome to Pac-Man, the classic arcade game where you control a yellow, pizza-shaped character with an insatiable hunger for dots! Here's how to play:</p>
+                <p class="w-s-i">1. Use the arrow keys to guide Pac-Man through the maze. Up, down, left, or right -- it's your call!</p>
+                <p class="w-s-i">2. Eat all <img src="/media/ydnb.png" height="20px" width="20px"> to advance to the next level. But beware: there are <img src="/media/grb.png" height="20px" width="20px"> lurking in the maze, and they're not too happy about your presence.</p>
+                <p class="w-s-i">3. If you eat one of the <img src="/media/pdrb.png" height="20px" width="20px">, you'll become <img src="/media/biceps.png" height="20px" width="20px"> for a short time and be able to turn the tables on those pesky <img src="/media/sgrb.png" height="20px" width="20px">.</p>
+                <p class="w-s-i">4. But be careful -- if a ghost catches you, you'll lose a life. Lose all your lives, and it's <img src="/media/riprb.png" height="20px" width="20px">. Don't worry, though -- Pac-Man is always up for another round.</p>
+                <br>
+                <p class="w-s-i">> Campaign: In this mode, you will progress through a series of simpler maps with a level progression and a story. 
+                    Each level will be increasingly challenging.</p>
+                <p class="w-s-i">> Regular: Test your skills against other players from around the world. 
+                    Challenging maps in a random order, scores are recorded and uploaded. </p>
+                <button id="campaign-button">Campaign</button>
+                <button id="regular-button">Regular</button>
+            </div>
+
+            <div id="campaign-story" class="hidden">
+                <p id="campaign-text"></p>
+                
+                <div id="campaign-input" class="hidden">
+                    <input type="text" id="campaign-name" class="campaign-name" placeholder="Your Name" maxlength="6" required>
+                    <br>
+                    <input type="text" id="campaign-nemesis-name" class="campaign-nemesis-name" placeholder="Name of Your Nemesis" maxlength="6" required>
+                    <br>
+                </div>
+
+                <button id="campaign-submit" class="campaign-submit">Let's Go!</button>
+                <button id="campaign-back">Back</button>
+                <button id="campaign-next">Next</button>
+            </div>
+
+            <div class="instructions">
+                <br>
+                <ul>
+                    <li><span class="fas fa-arrow-up"></span> - up</li>
+                    <li><span class="fas fa-arrow-left"></span> - left</li>
+                    <li><span class="fas fa-arrow-right"></span> - right</li>
+                    <li><span class="fas fa-arrow-down"></span> - down</li>
+                    <br>
+                  <li><span>p - pause/continue</span></li>
+                  <li><span>r - restart</span></li>
+                  <li><span>m - toggle-music</span></li>
+                </ul>
+            </div>
+
+            <div id="scoreboard-container">
+                <span id="scoreboard-name">Scoreboard</span>
+                <div id="scoreboard" class="scoreboard"></div>
+                <button class="prev">Previous</button>
+                <button class="next">Next</button>   
+            </div>
+
+            <div class="tool-container">
+                <div id="fps" class="fps"></div>
+                
+                <div class="sound">
+                    <img class="sound-button" src="/media/sound-on.png">
+                </div>
+            </div>
+
+            <div id="arena-container">    
+                <div id="timer" class="timer"></div>
+                <div id="lives" class="lives"></div>
+                <div id="score" class="score"></div>
+            <div id="map-container"></div>
+            </div>
+
+            <div id="pausemenu" class="hidden">
+                <h2>Game Paused</h2>
+                <button id="resume-btn">Resume</button>
+                <button id="restart-btn">Restart</button>
+            </div>
+
+            <div id="game-over" class="hidden">
+                <h1>You lost!</h1>
+                <br>
+                <p>Survived for:</p>
+                <span id="elapsed-time"></span>
+                <p>Score:</p>
+                <span id="sub-score"></span>
+                <br>
+                <p>Your score is in the top <span id="percentile"></span>% of all scores</p>
+                <input type="text" id="lost-name" class="submit-name" placeholder="Enter Name" maxlength="6">
+                <button id="submit-btn" class="submit">Submit</button>
+                <button id="restart-btn">Restart</button>
+            </div>
+
+            <div id="game-over-campaign" class="hidden">
+                <h1>You lost!</h1>
+                <br>
+                <p>Better luck next time!</p>
+                <p>Survived for:</p>
+                <span id="elapsed-time-campaign"></span>
+                <p>Score:</p>
+                <span id="sub-score-campaign"></span>
+                <br>
+                <button id="restart-btn">Restart</button>
+            </div>
+
+            <div id="game-won" class="hidden">
+                <h1>YOU WON!</h1>
+                <br>
+                <p>Survived for:</p>
+                <span id="elapsed-time1"></span>
+                <p>Score:</p>
+                <span id="sub-score1"></span>
+                <br>
+                <p>Your score is in the top <span id="percentile1"></span>% of all scores</p>
+                <input type="text" id="won-name" class="submit-name" placeholder="Enter Name" maxlength="6">
+                <button id="submit-btn" class="submit">Submit</button>
+                <button id="restart-btn">Restart</button>
+            </div>
+
+            <div id="game-won-campaign" class="hidden">
+                <h1>YOU WON!</h1>
+                <br>
+                <p>Congratulations!</p>
+                <p>You are the true king of Pac-Man</p>
+                <br>
+                <p>Survived for:</p>
+                <span id="elapsed-time1-campaign"></span>
+                <p>Score:</p>
+                <span id="sub-score1-campaign"></span>
+                <br>
+                <button id="restart-btn">Restart</button>
+            </div>
+
+            <div id="campaign-checkpoint" class="hidden">
+                <h1>Almost there..</h1>
+                <br>
+                <p>If you beat this level, you will reclaim your throne of the Pac-Man top dog!</p>
+                <br>
+                <p>Are you ready?</p>
+                <br>
+                <button id="continue-campaign">Heck yeah!!</button>
+            </div>
+
+            <div id="copyright">
+                <span>© 2023 Enri Suimets & Viktor Veertee. All rights reserved.</span>
+            </div>
+        </body>
+</html>
