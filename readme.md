@@ -6,7 +6,7 @@ Additional criterias that had to be met can be found here: [Task Objective and A
 ---
 
 ## How To Run
-The game is hosted on the following server:
+The game is hosted on:
 > http://176.112.158.14:8082/
 ---
 The game features 2 different modes: 
